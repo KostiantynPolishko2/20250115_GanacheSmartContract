@@ -10,7 +10,7 @@ contract MarketItem {
     }
 
     enum Categories {dairy, bakery, fruits, vagatables}
-    Categories public category;
+    Categories private category;
 
     Item private marketItem;
 
@@ -23,11 +23,11 @@ contract MarketItem {
         return (marketItem, category);
     }
 
-    function setPrice(uint256 _price) external {
+    function setPrice(uint256 _price) internal {
         marketItem.price = _price;
     }
 
-    function setIsAvailable(bool _isAvailable) external {
+    function setIsAvailable(bool _isAvailable) internal {
         marketItem.isAvailable = _isAvailable;
     }
 }
