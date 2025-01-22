@@ -1,5 +1,6 @@
-const FoodProduct = artifacts.require("FoodProduct");
+const ProductStorage = artifacts.require("ProductStorage");
 
-module.exports = function (deployer) {
-  deployer.deploy(FoodProduct, "milk", 42, true);
+module.exports = function (deployer, network, accounts) {
+  const ownerAddress = accounts[0];
+  deployer.deploy(ProductStorage, ownerAddress);
 };

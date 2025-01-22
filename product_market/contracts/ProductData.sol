@@ -10,12 +10,6 @@ library ProductData {
         address owner;
     }
 
-    // function setQuantity(Product storage _product, address _owner, uint128 _quantity) internal {
-    //     if (_product.owner == _owner){
-    //         _product.quantity = _quantity;
-    //     }
-    // }
-
     function milk(uint128 _quantity, address _owner) internal pure returns (Product memory) {
         return Product("milk", "dairy", 42, _quantity, _owner);
     }
