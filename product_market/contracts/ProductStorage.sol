@@ -5,7 +5,7 @@ pragma experimental ABIEncoderV2;
 import "./ProductData.sol";
 
 contract ProductStorage {
-    address public owner;
+    address private owner;
     using ProductData for ProductData.Product;
 
     // store the products in a mapping
@@ -17,21 +17,23 @@ contract ProductStorage {
         loadProduct(owner);
     }
 
+    event AddProduct(address _from, string _name, uint indexed _timestamp);
+
     function loadProduct(address _owner) private {
         products["milk"] = ProductData.milk(10, _owner);
-        productExist["milk"] = true;
+        productsExist["milk"] = true;
 
         products["bread"] = ProductData.bread(10, _owner);
-        productExist["bread"] = true;
+        productsExist["bread"] = true;
 
         products["vodka"] = ProductData.vodka(5, _owner);
-        productExist["vodka"] = true;
+        productsExist["vodka"] = true;
 
         products["sausage"] = ProductData.sausage(5, _owner);
-        productExist["sausage"] = true;
+        productsExist["sausage"] = true;
     }
 
-    function getProduct(string memory _name) public view returns(ProductData.Product){
+    function getProduct(string memory _name) public view returns(ProductData.Product memory){
         require(productsExist[_name], string.concat("Product ", _name, " not found"));
 
         return products[_name];
@@ -40,12 +42,14 @@ contract ProductStorage {
     function addProduct(ProductData.Product memory _product) public {
         products[_product.name] = _product;
         productsExist[_product.name] = true;
+
+        emit AddProduct(_product.owner, _product.name, block.timestamp);
     }
 
     function setProductQuantity(string memory _name, uint128 _quantity) public {
         require(productsExist[_name], string.concat("Product ", _name, " not found"));
-        require(products[_name].quantity < _quantity, string.concat("Product ", _name, " not enought for required ", _quantity, " pc."));
+        require(products[_name].quantity < _quantity, string.concat("Product ", _name, " not enought for required quantity"));
 
-        products[_name].quantiy -= _quantity;
+        products[_name].quantity -= _quantity;
     }
 }

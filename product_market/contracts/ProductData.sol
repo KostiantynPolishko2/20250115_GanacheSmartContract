@@ -14,15 +14,15 @@ library ProductData {
         return Product("milk", "dairy", 42, _quantity, _owner);
     }
 
-    function bread(address _owner) internal pure returns (Product memory) {
+    function bread(uint128 _quantity, address _owner) internal pure returns (Product memory) {
         return Product("bread", "bakery", 21, _quantity, _owner);
     }
 
-    function vodka(address _owner) internal pure returns (Product memory) {
+    function vodka(uint128 _quantity, address _owner) internal pure returns (Product memory) {
         return Product("vodka", "alcohol", 120, _quantity, _owner);
     }
 
-    function sausage(address _owner) internal pure returns (Product memory) {
+    function sausage(uint128 _quantity, address _owner) internal pure returns (Product memory) {
         return Product("sausage", "meat", 220, _quantity, _owner);
     }
 
