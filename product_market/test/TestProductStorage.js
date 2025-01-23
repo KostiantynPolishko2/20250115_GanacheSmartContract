@@ -2,17 +2,20 @@ const ProductStorage = artifacts.require("./ProductStorage.sol");
 
 contract("ProductStorage", accounts => {
   it("...to store the values of struct 'Product'", async () => {
-    const ownerAddress = accounts[0];
 
+    const ownerAddress = accounts[0];
     // Use new instance of the contract
-    // const productStorage = await ProductStorage.new(accounts[0]);
+    // const productStorage = await ProductStorage.new(ownerAddress);
 
     // Use deployed instance to network
     const productStorage = await ProductStorage.deployed();
 
+    // Load products to storage from library ProductData
+    await productStorage.loadProduct();
+
     // Get struct of product "milk"
-    const product_milk = await productStorage.getProduct("milk");
-    assert.equal(product_milk.name, "milk", "Error! Incorrect name.");
+    const product = await productStorage.getProduct("milk");
+    assert.equal(product.name, "milk", "Error! Incorrect name.");
 
     // Add new product "cake"
     const newProduct = {
