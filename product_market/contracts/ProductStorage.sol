@@ -48,8 +48,9 @@ contract ProductStorage {
 
     function getProduct(string memory _name) public view returns(AbsProduct){
         require(productsExist[_name], string.concat("Product ", _name, " not found"));
+        address productAddress = products[_name];
 
-        return AbsProduct(products[_name]);
+        return AbsProduct(productAddress);
     }
 
     function addProduct(AbsProduct _product) public {

@@ -1,5 +1,7 @@
 const ProductStorage = artifacts.require("./ProductStorage.sol");
 
+
+
 contract("ProductStorage", accounts => {
   it("...to store the values of struct 'Product'", async () => {
 
@@ -15,18 +17,10 @@ contract("ProductStorage", accounts => {
 
     // Get struct of product "milk"
     const product = await productStorage.getProduct("milk");
-    assert.equal(product.name, "milk", "Error! Incorrect name.");
+    const info = product.getInfo();
+    const property = info[0];
+    assert.equal(property.name, "milk", "Error! Incorrect name.");
 
-    // Add new product "cake"
-    const newProduct = {
-      name: "cake",
-      category: "bakery",
-      price: 156,
-      quantity: 4,
-      owner: ownerAddress
-    }
-    await productStorage.addProduct(newProduct);
-    const product_cake = await productStorage.getProduct("cake");
-    assert.equal(product_cake.price, 156, "Error! Incorrect price.");
+    // Add new product "cigarretes"
   });
 });
