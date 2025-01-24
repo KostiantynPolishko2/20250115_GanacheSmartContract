@@ -2,15 +2,13 @@
 pragma solidity >=0.4.25 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import "./struct/ProductProperty.sol";
-import "./libraries/ProductData.sol";
 import "./ProductStorage.sol";
 
 contract ProductMarket {
     address private owner;
     ProductStorage internal productStorage;
     // store sales of product
-    mapping(uint => ProductProperty) private productSales;
+    mapping(uint => string) private productSales;
 
     constructor(address _owner){
         owner = _owner;

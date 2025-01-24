@@ -8,8 +8,10 @@ import "./products/Milk.sol";
 import "./products/Bread.sol";
 import "./products/Vodka.sol";
 import "./products/Sausage.sol";
+import "./libraries/ProductLibr.sol";
 
 contract ProductStorage {
+    using ProductLibr for string;
     address private owner;
 
     // store the products in a mapping
@@ -40,6 +42,8 @@ contract ProductStorage {
 
         AbsProduct sausage = new Sausage(owner, 8);
         addProduct(sausage);
+
+        emit AddProduct(owner, "all", block.timestamp);
     }
 
     function getProduct(string memory _name) public view returns(AbsProduct){
@@ -55,6 +59,8 @@ contract ProductStorage {
         products[_name] = _address;
         productsExist[_name] = true;
 
-        emit AddProduct(_product.getOwner(), _name, block.timestamp);
+        if(!ProductLibr.isInLoadStorage(_name)){
+            emit AddProduct(_product.getOwner(), _name, block.timestamp);
+        }
     }
 }
