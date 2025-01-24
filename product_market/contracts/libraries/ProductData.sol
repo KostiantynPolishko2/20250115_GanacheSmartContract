@@ -2,7 +2,7 @@
 pragma solidity >=0.4.25 <0.9.0;
 pragma experimental ABIEncoderV2;
 
-import "./ProductProperty.sol";
+import "../struct/ProductProperty.sol";
 
 library ProductData {
 
