@@ -3,6 +3,7 @@ pragma solidity >=0.4.25 <0.9.0;
 pragma experimental ABIEncoderV2;
 
 import "./struct/Property.sol";
+import "./struct/SaleInfo.sol";
 import "./products/AbsProduct.sol";
 import "./products/Milk.sol";
 import "./products/Bread.sol";
@@ -63,5 +64,16 @@ contract ProductStorage {
         if(!ProductLibr.isInLoadStorage(_name)){
             emit AddProduct(_product.getOwner(), _name, block.timestamp);
         }
+    }
+
+    function getSaleInfo(AbsProduct _product) public view returns(SaleInfo memory){
+        (Property memory _property, ) = _product.getInfo();
+        uint128 _quantity = _product.getQuantity();
+
+        return SaleInfo(_property.name, _property.price, _quantity);
+    }
+
+    function setProductExist(string memory _name, bool _isExist) public {
+        productsExist[_name] = _isExist;
     }
 }

@@ -19,4 +19,12 @@ abstract contract AbsProduct {
     function getOwner() public view returns(address){
         return owner;
     }
+
+    function getQuantity() public view returns(uint128){
+        return quantity;
+    }
+
+    function setQuantity(uint128 _quantity) public {
+        quantity = _quantity;
+    }
 }
