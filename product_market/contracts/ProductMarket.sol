@@ -43,6 +43,10 @@ contract ProductMarket {
         _;
     }
 
+    function loadStorage() public {
+        productStorage.loadProduct();
+    }
+
     function sellProduct(string memory productName, uint128 orderQuantity) external payable customerBalance(msg.value, 100) {
         AbsProduct _product = productStorage.getProduct(productName);
     
