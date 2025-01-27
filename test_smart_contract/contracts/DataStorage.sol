@@ -10,12 +10,12 @@ contract DataStorage {
     owner = msg.sender;
   }
 
-  function setData(uint256 _balance) public {
+  function setBalance(uint256 _balance) public {
     require(_balance > 0, "Error! The balance have to be > 0.");
     balance = _balance;
   }
 
-  function getData() public view returns (uint256){
+  function getBalance() public view returns (uint256){
     return balance;
   }
 
